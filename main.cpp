@@ -9,11 +9,15 @@ void polish_counting();
 class Exception {
     string error = "Unknown error";
 public:
+    
     Exception(string error) {
         this->error = error;
     }
     Exception() {}
-    string message() { return error;}
+    
+    string message() {
+        return error;
+    }
 };
 
 int main() {

@@ -6,6 +6,16 @@
 int divide(int a, int b);
 void polish_counting();
 
+class Exception {
+    string error = "Unknown error";
+public:
+    Exception(string error) {
+        this->error = error;
+    }
+    Exception() {}
+    string message() { return error;}
+};
+
 int main() {
     polish_counting();
     return 0;
@@ -13,7 +23,7 @@ int main() {
 
 int divide(int a, int b){
     std::cout << "ok" << std::endl;
-    if(b==0) throw std::exception();
+    if(b == 0) throw new Exception("Zero division"));
     else return a/b;
 }
 
@@ -47,18 +57,10 @@ void polish_counting(){
                         stack.push(number);
                         continue;
                     case '/':
-                        std::cout << "ok1" << std::endl;
-                        try {
-                            std::cout << "ok2" << std::endl;
-                            number=divide(stack.top(), number);
-                            stack.pop();
-                            stack.push(number);
-                        }
-                        catch (const std::exception &err) {
-                            std::cout << err.what() << std::endl;
-                            std::cout << "error: division by zero" << std::endl;
-                        }
-                        continue;
+                        number=divide(stack.top(), number);
+                        stack.pop();
+                        stack.push(number);
+                        break;
                     case '=':
                         std::cout << "= " << number << std::endl;
                         break;
